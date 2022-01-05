@@ -87,8 +87,4 @@ public class ReqresTests {
         assertThat(jsonActual, JsonSchemaValidator.matchesJsonSchemaInClasspath("jsonschemes/schema-new-user.json"));
 
     }
-
-
-
-
 }

@@ -67,5 +67,4 @@ public class SomeRestAssuredTests {
                     .statusCode(200)
                     .body("value.ready", is(true));
     }
-
 }
