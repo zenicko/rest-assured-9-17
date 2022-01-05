@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://reqres.in/api/users",
+  "title": "The schema of response create user",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "name": "morpheus",
+      "job": "leader",
+      "id": "625",
+      "createdAt": "2022-01-05T15:51:13.719Z"
+    }
+  ],
+  "required": [
+    "name",
+    "job",
+    "id",
+    "createdAt"
+  ],
+  "properties": {
+    "name": {
+      "$id": "#/properties/name",
+      "type": "string",
+      "title": "The name schema",
+      "description": "The name of a user",
+      "default": "",
+      "examples": [
+        "morpheus"
+      ]
+    },
+    "job": {
+      "$id": "#/properties/job",
+      "type": "string",
+      "title": "The job schema",
+      "description": "The name of a job",
+      "default": "",
+      "examples": [
+        "leader"
+      ]
+    },
+    "id": {
+      "$id": "#/properties/id",
+      "type": "string",
+      "title": "The id schema",
+      "description": "The unique identifier for a user",
+      "default": "",
+      "examples": [
+        "625"
+      ]
+    },
+    "createdAt": {
+      "$id": "#/properties/createdAt",
+      "type": "string",
+      "title": "The create date",
+      "description": "The create date of a user",
+      "default": "",
+      "examples": [
+        "2022-01-05T15:51:13.719Z"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

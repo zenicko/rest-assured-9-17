@@ -1,0 +1,37 @@
+plugins {
+    id "java-library"
+}
+
+def junitVersion = "5.8.2"
+def selenideVersion = "5.24.2"
+
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "org.assertj:assertj-core:3.22.0",
+            "org.slf4j:slf4j-simple:1.7.32",
+            "com.codeborne:selenide:$selenideVersion",
+            "io.rest-assured:rest-assured:4.4.0",
+            "io.rest-assured:json-schema-validator:4.4.0"
+    )
+
+    testRuntimeOnly(
+            "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    )
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test) {
+    systemProperties(System.getProperties())
+    useJUnitPlatform()
+}
+
