@@ -1,9 +1,8 @@
-package ru.zenicko.in.reqres.tests.api;
+package ru.zenicko.tests.reqres.api;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
-import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -85,6 +84,5 @@ public class ReqresTests {
         System.out.println(jsonActual);
 
         assertThat(jsonActual, JsonSchemaValidator.matchesJsonSchemaInClasspath("jsonschemes/schema-new-user.json"));
-
     }
 }
