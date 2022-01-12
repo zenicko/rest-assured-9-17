@@ -5,13 +5,12 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.Test;
-import ru.zenicko.config.NewUser;
+import ru.zenicko.config.NewUserConfig;
 
 import static io.qameta.allure.Allure.step;
 
 public class RegistrationTest extends TestBase {
-
-    NewUser newDataUser = ConfigFactory.create(NewUser.class, System.getProperties());
+    final private NewUserConfig newDataUser = ConfigFactory.create(NewUserConfig.class, System.getProperties());
 
     @Test
     void registrateNewUserByIU() {
@@ -22,7 +21,7 @@ public class RegistrationTest extends TestBase {
                 password = newDataUser.password();
 
         step("Open the registration page",()->{
-            Selenide.open("/register");
+            Selenide.open(urlsConfig.urlApiRegistrate());
 
         });
         step("Set a gender",()->{

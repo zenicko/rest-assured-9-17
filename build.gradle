@@ -25,19 +25,14 @@ repositories {
 
 
 dependencies {
-    implementation("com.codeborne:selenide:$selenideVersion",
-            "io.qameta.allure:allure-selenide:$allureVersion",
-            "io.rest-assured:rest-assured:4.4.0",
-    )
-
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             "org.assertj:assertj-core:3.22.0",
-            //"com.codeborne:selenide:$selenideVersion",
-            //"io.rest-assured:rest-assured:4.4.0",
+            "com.codeborne:selenide:$selenideVersion",
+            "io.rest-assured:rest-assured:4.4.0",
             "io.rest-assured:json-schema-validator:4.4.0",
 
-            //"io.qameta.allure:allure-selenide:$allureVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
 
             "org.aspectj:aspectjweaver:1.9.6",
             "org.aeonbits.owner:owner:1.0.10"

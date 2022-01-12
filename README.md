@@ -129,9 +129,38 @@ The properties of a new user is found in `resources/newuser.properties`.
 
 4. Existing user.
    
-   Logins:  default login timrode@mail.com
+   Logins:  
+
+   default login timrode@mail.com
+
    a@a.ru, a1@a.ru, a10@a.ru,
+   
    password = "123456".
+
+## Code review 
+
+PS. Есть небольшие недочеты в логическом оформлении тестов:
+1. Получение cookie и присвоение их браузеру должно быть не в `@BeforeAll`, а в `@BeforeEach`.
+   Каждый тест в идеале должен запускаться в новом экземпляре браузера.
+   А вообще тесты нужно разрабатывать так, чтобы можно было их все запустить параллельно одновременно.
+   То есть Ваш код необходимо переместить в `@BeforeEach`, а в `@AfterEach` закрывать браузер - `closeWebDriver()`
+```
+cookies = ApiSteps.getCookiesAfterSignIn(UserData.setUsedData("timrode@mail.com","123456", false), ApiSteps.getBaseUrl(), "/login");
+Selenide.open(ApiSteps.getBaseUrl() + "/Themes/DefaultClean/Content/images/logo.png");
+WebDriverRunner.getWebDriver().manage().addCookie(new Cookie("NOPCOMMERCE.AUTH", cookies.get("NOPCOMMERCE.AUTH")));
+```   
+
+2. Тоже частично описал в п. 1. Это нужно делать в `@AfterEach`, а не в `@AfterAll`.
+```
+@AfterAll
+   static void shouldBeEmptyAfterLogOut() {
+
+WebDriverRunner.clearBrowserCache();
+WebDriverRunner.getWebDriver().quit();
+}
+```
+4. Почему `MainPageTests` не наследовали от `BaseTest`? Там, например, все верно написано
+
 
 
 ## Resources
@@ -148,5 +177,7 @@ ___
 1. [REST Assured: что мы узнали за пять лет использования инструмента](https://habr.com/ru/company/dins/blog/464225/)
 2. [A self-contained hamcrest jar containing all of the sub-modules in a single artifact.](https://mvnrepository.com/artifact/org.hamcrest/hamcrest-all)
 3. [Куки - информация, которую веб-сайты хранят на вашем компьютере](https://support.mozilla.org/ru/kb/kuki-informaciya-kotoruyu-veb-sajty-hranyat-na-vas)
+4. [Xpath examples](https://devhints.io/xpath#class-check)
+
 
 

@@ -1,35 +1,33 @@
-package ru.zenicko.demowebshop;
+package ru.zenicko.api;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import ru.zenicko.tests.demowebshop.TestBase;
+import ru.zenicko.userdata.ExistUserData;
+
 import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 
-public class ApiSteps {
+public class ApiSteps extends TestBase {
+
     private static Map<String, String> cookiesStart;
     private static Map<String, String> cookiesAfterSignIn;
-    final private static String BASEURL = "http://demowebshop.tricentis.com";
-    final private static String EXISTUSER = "Email=timrode%40mail.com&Password=123456&RememberMe=false";
+    final private static String EXISTUSER = ExistUserData.setExistUsedData();
 
 
-    /**
-     *
-     * @return
-     */
-    static Map<String, String> getStartCookies() {
+    public static Map<String, String> getStartCookies() {
         cookiesStart =
                 RestAssured
                         .given()
                         .when()
-                        .get(BASEURL)
+                        .get(urlsConfig.urlApiBase())
                         .then()
                         .extract().cookies();
 
         return cookiesStart;
     }
-
-    static Map<String, String> getStartCookies(String urlPage) {
+    public static Map<String, String> getStartCookies(String urlPage) {
         cookiesStart =
                 RestAssured
                         .given()
@@ -41,7 +39,7 @@ public class ApiSteps {
         return cookiesStart;
     }
 
-    static public Map<String, String> getCookiesAfterSignIn() {
+    public static Map<String, String> getCookiesAfterSignIn() {
         getStartCookies();
         cookiesAfterSignIn =
                 RestAssured
@@ -50,14 +48,14 @@ public class ApiSteps {
                         .cookies(cookiesStart)
                         .body(EXISTUSER)
                         .when()
-                        .post(BASEURL + "/login")
+                        .post(urlsConfig.urlApiBase() + urlsConfig.urlApiLogin())
                         .then()
                         .extract().cookies();
 
         return cookiesAfterSignIn;
     }
 
-    static public Map<String, String> getCookiesAfterSignIn(String existUser, String urlPage, String apiRequest) {
+    public static  Map<String, String> getCookiesAfterSignIn(String existUser, String urlPage, String apiRequest) {
         getStartCookies(urlPage);
         cookiesAfterSignIn =
                 RestAssured
@@ -73,29 +71,21 @@ public class ApiSteps {
         return cookiesAfterSignIn;
     }
 
-    static public Response putStafToBaskit(String apiUrl) {
+    public static Response putStafToBaskit(String apiUrlAddCart) {
         Response data =
             RestAssured
                     .given()
                     .contentType("application/x-www-form-urlencoded; charset=UTF-8")
                     .cookies(cookiesAfterSignIn)
-                    .body(BASEURL + apiUrl)
+                    .body(urlsConfig.urlApiBase() + apiUrlAddCart)
                     .when()
-                    .post(BASEURL + apiUrl)
+                    .post(urlsConfig.urlApiBase() + apiUrlAddCart)
                     .then()
                     .statusCode(200)
                     .body("success", is(true))
                     .extract().response();
 
         return data;
-    }
-
-    static public String getBaseUrl() {
-        return BASEURL;
-    }
-
-    static public String getExistUser() {
-        return EXISTUSER;
     }
 
 }
