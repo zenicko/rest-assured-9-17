@@ -11,12 +11,15 @@ import static org.hamcrest.core.Is.is;
 
 public class ApiSteps extends TestBase {
 
-    private static Map<String, String> cookiesStart;
-    private static Map<String, String> cookiesAfterSignIn;
-    final private static String EXISTUSER = ExistUserData.setExistUsedData();
+    private Map<String, String> cookiesStart;
+    private Map<String, String> cookiesAfterSignIn;
+    private String existUser;
 
+    ApiSteps() {
+        existUser = ExistUserData.setExistUsedData();
+    }
 
-    public static Map<String, String> getStartCookies() {
+    public Map<String, String> getStartCookies() {
         cookiesStart =
                 RestAssured
                         .given()
@@ -27,7 +30,7 @@ public class ApiSteps extends TestBase {
 
         return cookiesStart;
     }
-    public static Map<String, String> getStartCookies(String urlPage) {
+    public Map<String, String> getStartCookies(String urlPage) {
         cookiesStart =
                 RestAssured
                         .given()
@@ -39,14 +42,14 @@ public class ApiSteps extends TestBase {
         return cookiesStart;
     }
 
-    public static Map<String, String> getCookiesAfterSignIn() {
+    public Map<String, String> getCookiesAfterSignIn() {
         getStartCookies();
         cookiesAfterSignIn =
                 RestAssured
                         .given()
                         .contentType("application/x-www-form-urlencoded")
                         .cookies(cookiesStart)
-                        .body(EXISTUSER)
+                        .body(existUser)
                         .when()
                         .post(urlsConfig.urlApiBase() + urlsConfig.urlApiLogin())
                         .then()
@@ -55,7 +58,7 @@ public class ApiSteps extends TestBase {
         return cookiesAfterSignIn;
     }
 
-    public static  Map<String, String> getCookiesAfterSignIn(String existUser, String urlPage, String apiRequest) {
+    public Map<String, String> getCookiesAfterSignIn(String existUser, String urlPage, String apiRequest) {
         getStartCookies(urlPage);
         cookiesAfterSignIn =
                 RestAssured
@@ -71,7 +74,7 @@ public class ApiSteps extends TestBase {
         return cookiesAfterSignIn;
     }
 
-    public static Response putStafToBaskit(String apiUrlAddCart) {
+    public Response putStafToBaskit(String apiUrlAddCart) {
         Response data =
             RestAssured
                     .given()

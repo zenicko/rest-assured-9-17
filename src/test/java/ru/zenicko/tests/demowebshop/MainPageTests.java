@@ -13,17 +13,15 @@ import java.util.Map;
 import static io.qameta.allure.Allure.step;
 
 public class MainPageTests extends TestBase {
-    static Map<String, String> cookies;
 
     @BeforeEach
     @DisplayName("Set sign-in cookies")
     void SetUp(){
-        cookies = ApiSteps.getCookiesAfterSignIn();
+        Map<String, String> cookies = ApiSteps.getCookiesAfterSignIn();
         Selenide.open(urlsConfig.urlUiTouchingObject());
         WebDriverRunner.getWebDriver().manage().addCookie(new Cookie("NOPCOMMERCE.AUTH", cookies.get("NOPCOMMERCE.AUTH")));
         WebDriverRunner.getWebDriver().manage().addCookie(new Cookie("Nop.customer", cookies.get("Nop.customer")));
     }
-
 
     @Test
     @DisplayName("Check the user email in header main page after sign-in")
