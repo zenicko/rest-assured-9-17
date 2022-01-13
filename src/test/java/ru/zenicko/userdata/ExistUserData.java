@@ -4,29 +4,29 @@ import org.aeonbits.owner.ConfigFactory;
 import ru.zenicko.config.ExistUserConfig;
 
 public class ExistUserData {
-    private static String userData = "";
+    private String userData = "";
 
-    public static String setExistUsedData() {
+    public ExistUserData() {
         ExistUserConfig existData = ConfigFactory.create(ExistUserConfig.class);
-        String email = existData.email(),
+        String
+                email = existData.email(),
                 password = existData.password();
         boolean rememberMe = existData.rememberMe();
         userData = getRequestDataForUser(email, password, rememberMe);
 
-        return userData;
      }
 
-    public static String setExistUsedData(String email, String password, boolean rememberMe) {
+    public String setExistUsedData(String email, String password, boolean rememberMe) {
         userData = getRequestDataForUser(email, password, rememberMe);
 
         return userData;
     }
 
-    public static String getUserData() {
+    public String getUserData() {
         return userData;
     }
 
-    public static String getEmailExistUser() {
+    public String getEmailExistUser() {
          int startPos = "Email=".length();
          int endPos = userData.indexOf('&');
 
@@ -39,7 +39,7 @@ public class ExistUserData {
                 "%40" + email.split("@")[1] +
                 "&Password=" +
                 password +
-                "&RememberMe" +
+                "&RememberMe=" +
                 rememberMe;
     }
 

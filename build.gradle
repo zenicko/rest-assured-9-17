@@ -7,8 +7,6 @@ def junitVersion = "5.8.2",
     selenideVersion = "5.24.2",
     allureVersion = "2.14.0";
 
-
-
 allure {
     version = allureVersion
     autoconfigure = true
@@ -48,8 +46,19 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-tasks.withType(Test) {
-    systemProperties(System.getProperties())
+test {
     useJUnitPlatform()
+}
+
+task mainPageAndBasket(type: Test) {
+    useJUnitPlatform{
+        includeTags "mainPageAndBasket"
+    }
+}
+
+task registration(type:Test){
+    useJUnitPlatform{
+        includeTags "registration"
+    }
 }
 

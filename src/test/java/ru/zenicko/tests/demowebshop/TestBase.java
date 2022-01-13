@@ -10,9 +10,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import ru.zenicko.config.NewUserConfig;
 import ru.zenicko.config.UrlsConfig;
+import ru.zenicko.userdata.ExistUserData;
 
 public class TestBase {
     public static UrlsConfig urlsConfig = ConfigFactory.create(UrlsConfig.class);
+    public ExistUserData existUser = new ExistUserData();
 
     @BeforeEach
     void setUp() {

@@ -2,6 +2,7 @@ package ru.zenicko.config;
 
 import org.aeonbits.owner.Config;
 
+@Config.Sources({"classpath:users/newuser.properties"})
 public interface NewUserConfig extends Config {
     @Key("gender")
     String gender();

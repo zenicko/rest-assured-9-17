@@ -4,11 +4,13 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.zenicko.config.NewUserConfig;
 
 import static io.qameta.allure.Allure.step;
 
+@Tag("registration")
 public class RegistrationTest extends TestBase {
     final private NewUserConfig newDataUser = ConfigFactory.create(NewUserConfig.class, System.getProperties());
 

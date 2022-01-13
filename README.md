@@ -66,6 +66,10 @@ The properties of a new user is found in `resources/newuser.properties`.
    Or you can create a new user.
 3. Start test (local) in command line
    `./gradlew test`
+   1. Only tests in class `RegistrationTest`
+      `./gradlew registration`
+   2. Only tests in class `MainPageTests`
+      `./gradlew mainpageAndBasket`
 
 ## About api site
 1. Curl bush request "Registrate a new user"

@@ -13,11 +13,6 @@ public class ApiSteps extends TestBase {
 
     private Map<String, String> cookiesStart;
     private Map<String, String> cookiesAfterSignIn;
-    private String existUser;
-
-    ApiSteps() {
-        existUser = ExistUserData.setExistUsedData();
-    }
 
     public Map<String, String> getStartCookies() {
         cookiesStart =
@@ -49,7 +44,7 @@ public class ApiSteps extends TestBase {
                         .given()
                         .contentType("application/x-www-form-urlencoded")
                         .cookies(cookiesStart)
-                        .body(existUser)
+                        .body(existUser.getUserData())
                         .when()
                         .post(urlsConfig.urlApiBase() + urlsConfig.urlApiLogin())
                         .then()
