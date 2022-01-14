@@ -13,6 +13,9 @@ The project shows how you can test API by using the library `Rest-assured`.
 ## Acknowledgements
 ___
 [Vasenkov Stanislav](https://github.com/svasenkov)
+
+**Reviewer Alex**
+
 [Maintenance and technical support website https://reqres.in/](https://reqres.in/)
 [Maintenance and technical support website http://demowebshop.tricentis.com](http://demowebshop.tricentis.com)
 
@@ -59,6 +62,8 @@ ___
    See 2 chart "About api site"
 3. Creaded interface `NewUser` which uses library `Owner`. 
 The properties of a new user is found in `resources/newuser.properties`.
+4. Fixed bugs. It's final version.
+
 
 ## Quick start to use
 1. Check data about new user in `resources/newuser.properties`.

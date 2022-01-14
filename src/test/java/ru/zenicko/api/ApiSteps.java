@@ -19,7 +19,7 @@ public class ApiSteps extends TestBase {
                 RestAssured
                         .given()
                         .when()
-                        .get(urlsConfig.urlApiBase())
+                        .get()
                         .then()
                         .extract().cookies();
 
@@ -46,7 +46,7 @@ public class ApiSteps extends TestBase {
                         .cookies(cookiesStart)
                         .body(existUser.getUserData())
                         .when()
-                        .post(urlsConfig.urlApiBase() + urlsConfig.urlApiLogin())
+                        .post(urlsConfig.urlApiLogin())
                         .then()
                         .extract().cookies();
 
@@ -77,7 +77,7 @@ public class ApiSteps extends TestBase {
                     .cookies(cookiesAfterSignIn)
                     .body(urlsConfig.urlApiBase() + apiUrlAddCart)
                     .when()
-                    .post(urlsConfig.urlApiBase() + apiUrlAddCart)
+                    .post(apiUrlAddCart)
                     .then()
                     .statusCode(200)
                     .body("success", is(true))
